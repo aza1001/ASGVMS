@@ -139,12 +139,18 @@ app.post('/register-staff', authenticateToken, async (req, res) => {
 
 /**
  * @swagger
+ * tags:
+ *   name: Security
+ *   description: Operations related to security registration
+ */
+
+/**
+ * @swagger
  * /register-security:
  *   post:
  *     summary: Register security
  *     description: Register a new security member.
- *     tags:
- *       - Security
+ *     tags: [Security]
  *     requestBody:
  *       required: true
  *       content:
