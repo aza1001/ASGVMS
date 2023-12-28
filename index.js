@@ -14,7 +14,7 @@ const mongoURL =
   'mongodb+srv://aza:mongoaza@cluster0.7jlxtuq.mongodb.net/?retryWrites=true&w=majority';
 
 // MongoDB database and collections names
-const dbName = 'company appointment';
+const dbName = 'appointment';
 const staffCollection = 'staff';
 const securityCollection = 'security';
 const appointmentCollection = 'appointments';
