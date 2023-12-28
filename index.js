@@ -30,7 +30,7 @@ const options = {
     definition: {
         openapi: '3.0.0',
         info: {
-            title: 'VMS appointment',
+            title: 'Office Appointment',
             version: '1.0.0',
         },
     },
@@ -51,7 +51,7 @@ mongodb.MongoClient.connect(mongoURL, /*{ useUnifiedTopology: true }*/)
  * @swagger
  * /register-staff:
  *   post:
- *     summary: Register a new staff member
+ *     summary: Register new staff
  *     requestBody:
  *       required: true
  *       content:
@@ -61,10 +61,10 @@ mongodb.MongoClient.connect(mongoURL, /*{ useUnifiedTopology: true }*/)
  *             properties:
  *               username:
  *                 type: string
- *                 description: The username of the staff member
+ *                 description: staff's username
  *               password:
  *                 type: string
- *                 description: The password of the staff member
+ *                 description: staff's password
  *     responses:
  *       201:
  *         description: Successfully registered
@@ -122,7 +122,7 @@ app.post('/register-staff', async (req, res) => {
  * /login-staff:
  *   post:
  *     summary: Login for Staff
- *     description: Login with username and password
+ *     description: Login for staff
  *     requestBody:
  *       required: true
  *       content:
@@ -179,7 +179,7 @@ app.post('/login-staff', async (req, res) => {
  * /login-security:
  *   post:
  *     summary: Security Login
- *     description: Authenticate security with username and password
+ *     description: login for security
  *     requestBody:
  *       required: true
  *       content:
@@ -258,7 +258,7 @@ app.post('/login-staff', async (req, res) => {
  * /appointments:
  *   post:
  *     summary: Create Appointment
- *     description: Create a new appointment
+ *     description: Create an appointment (staff)
  *     requestBody:
  *       required: true
  *       content:
@@ -335,7 +335,7 @@ app.post('/login-staff', async (req, res) => {
  * /staff-appointments/{username}:
  *   get:
  *     summary: Get Staff Appointments
- *     description: Retrieve appointments for a specific staff member
+ *     description: list of appointments for a specific staff member (security)
  *     parameters:
  *       - in: path
  *         name: username
@@ -413,7 +413,7 @@ app.post('/login-staff', async (req, res) => {
  * /appointments/{name}:
  *   put:
  *     summary: Update Appointment Verification
- *     description: Update the verification status of an appointment by name
+ *     description: Update the verification status of an appointment (security)
  *     security:
  *       - BearerAuth: []
  *     parameters:
@@ -484,7 +484,7 @@ app.put('/appointments/:name', authenticateToken, async (req, res) => {
  * /appointments/{name}:
  *   delete:
  *     summary: Delete Appointment
- *     description: Delete an appointment by name
+ *     description: Delete an appointment
  *     security:
  *       - BearerAuth: []
  *     parameters:
@@ -546,7 +546,7 @@ app.put('/appointments/:name', authenticateToken, async (req, res) => {
  * /appointments:
  *   get:
  *     summary: Get Appointments (for security)
- *     description: Retrieve appointments based on optional name filter, accessible only by security personnel
+ *     description: Retrieve appointments based on optional name filter (security)
  *     parameters:
  *       - in: query
  *         name: name
@@ -627,7 +627,7 @@ app.put('/appointments/:name', authenticateToken, async (req, res) => {
  * /logout:
  *   post:
  *     summary: User Logout
- *     description: Logout the user and invalidate the token
+ *     description: Logout user (staff & security)
  *     security:
  *       - BearerAuth: []
  *     responses:
