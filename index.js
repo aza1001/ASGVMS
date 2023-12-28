@@ -47,6 +47,11 @@ mongodb.MongoClient.connect(mongoURL, /*{ useUnifiedTopology: true }*/)
     const securityDB = db.collection(securityCollection);
     const appointmentDB = db.collection(appointmentCollection);
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+ })
+     
+
 /**
  * @swagger
  * /register-staff:
