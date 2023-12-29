@@ -26,6 +26,24 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
  })
 
+ const options = {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'Office Appointment',
+        version: '1.0.0',
+        description: 'API for managing office appointments.',
+      },
+      servers: [
+        {
+          url: `https://azavms.azurewebsites.net`,
+          description: 'Local development server',
+        },
+      ],
+    },
+    apis: ['./index.js'],
+  };
+
 // MongoDB connection
 mongodb.MongoClient.connect(mongoURL, { useUnifiedTopology: true })
   .then((client) => {
@@ -51,25 +69,6 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
-
- const options = {
-    definition: {
-      openapi: '3.0.0',
-      info: {
-        title: 'Office Appointment',
-        version: '1.0.0',
-        description: 'API for managing office appointments.',
-      },
-      servers: [
-        {
-          url: `https://azavms.azurewebsites.net`,
-          description: 'Local development server',
-        },
-      ],
-    },
-    apis: ['./index.js'],
-  };
-
 
 const swaggerSpec = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
