@@ -26,6 +26,11 @@ app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
  })
 
+
+ app.get('/hello', (req, res) => {
+    res.send('Hello World!')
+ })
+
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -46,10 +51,6 @@ mongodb.MongoClient.connect(mongoURL, /*{ useUnifiedTopology: true }*/)
     const staffDB = db.collection(staffCollection);
     const securityDB = db.collection(securityCollection);
     const appointmentDB = db.collection(appointmentCollection);
-
-app.get('/hello', (req, res) => {
-    res.send('Hello World!')
- })
      
 // Middleware for authentication and authorization
 const authenticateToken = (req, res, next) => {
