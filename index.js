@@ -2,11 +2,10 @@ const express = require('express');
 const mongodb = require('mongodb');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
+const { swaggerUi, specs } = require('./swagger.js');
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 3000;
 const secretKey = 'your-secret-key';
 
 // MongoDB connection URL
@@ -22,27 +21,7 @@ const appointmentCollection = 'appointments';
 // Middleware for parsing JSON data
 app.use(express.json());
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
- })
-
- const options = {
-    definition: {
-      openapi: '3.0.0',
-      info: {
-        title: 'Office Appointment',
-        version: '1.0.0',
-        description: 'API for managing office appointments.',
-      },
-      servers: [
-        {
-          url: `https://azavms.azurewebsites.net`,
-          description: 'Local development server',
-        },
-      ],
-    },
-    apis: ['./index.js'],
-  };
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // MongoDB connection
 mongodb.MongoClient.connect(mongoURL, { useUnifiedTopology: true })
@@ -132,7 +111,7 @@ app.post('/register-security', async (req, res) => {
 });
 
 
-    // Staff login
+// Staff login
 app.post('/login-staff', async (req, res) => {
   const { username, password } = req.body;
 
@@ -314,6 +293,7 @@ app.put('/appointments/:name', authenticateToken, async (req, res) => {
           res.status(500).send('Error retrieving appointments');
         });
     });
+
 // Logout
 app.post('/logout', authenticateToken, async (req, res) => {
     const { role } = req.user;
