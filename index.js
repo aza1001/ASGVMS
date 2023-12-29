@@ -27,10 +27,6 @@ app.listen(port, () => {
  })
 
 
- app.get('/hello', (req, res) => {
-    res.send('Hello World!')
- })
-
 const options = {
     definition: {
         openapi: '3.0.0',
@@ -44,8 +40,12 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+ })
+
 // MongoDB connection
-mongodb.MongoClient.connect(mongoURL, /*{ useUnifiedTopology: true }*/)
+mongodb.MongoClient.connect(mongoURL, { useUnifiedTopology: true })
   .then((client) => {
     const db = client.db(dbName);
     const staffDB = db.collection(staffCollection);
