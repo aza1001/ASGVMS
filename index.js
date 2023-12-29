@@ -2,7 +2,7 @@ const express = require('express');
 const mongodb = require('mongodb');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { swaggerUi, specs } = require('./swagger.js');
+const { swaggerUi, specs } = require('./swagger');
 
 const app = express();
 const port = 3000;
