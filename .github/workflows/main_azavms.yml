@@ -59,4 +59,4 @@ jobs:
           app-name: 'azavms'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_69B690725CBE4C7C8EC7FC7BB22CB7CD }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_90B8BD7D5F334ADC824D076BE57D3740 }}
